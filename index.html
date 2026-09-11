@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>Menu – Pizzeria</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#111;font-family:Arial,sans-serif;color:#fff}
+header{text-align:center;padding:18px 12px;background:#111}
+h1{margin:0;font-size:24px}
+.actions{display:flex;gap:10px;padding:0 12px 14px;max-width:700px;margin:auto}
+a{flex:1;text-decoration:none;text-align:center;padding:15px 10px;border-radius:12px;font-weight:700;font-size:16px}
+.menu{background:#fff;color:#111}
+.call{background:#1b9b4b;color:#fff}
+.viewer{max-width:1000px;margin:auto;background:#fff}
+.viewer iframe{display:block;width:100%;height:80vh;border:0}
+.note{text-align:center;color:#bbb;font-size:12px;padding:12px}
+</style>
+</head>
+<body>
+<header><h1>🍕 MENU</h1></header>
+<div class="actions">
+<a class="menu" href="#menu">Voir le menu</a>
+<a class="call" href="tel:+262692050580">📞 Appeler</a>
+</div>
+<div id="menu" class="viewer">
+<iframe src="menu.pdf#view=FitH" title="Menu de la pizzeria"></iframe>
+</div>
+<div class="note">Appuyez sur « Appeler » pour contacter directement la pizzeria.</div>
+</body>
+</html>
