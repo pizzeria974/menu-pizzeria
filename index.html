@@ -6,73 +6,78 @@
 <title>Menu - Pizzeria</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:#111;
-  font-family:Arial,sans-serif;
-  color:white;
+* {
+  box-sizing: border-box;
 }
 
-header{
-  text-align:center;
-  padding:18px 12px;
-  background:#111;
+body {
+  margin: 0;
+  background: #111;
+  font-family: Arial, sans-serif;
+  color: white;
 }
 
-h1{
-  margin:0;
-  font-size:28px;
+header {
+  text-align: center;
+  padding: 22px 14px 16px;
+  background: #111;
 }
 
-.actions{
-  display:flex;
-  gap:12px;
-  padding:0 14px 18px;
-  max-width:700px;
-  margin:auto;
+h1 {
+  margin: 0;
+  font-size: 30px;
 }
 
-.actions a{
-  flex:1;
-  text-decoration:none;
-  text-align:center;
-  padding:18px 10px;
-  border-radius:14px;
-  font-weight:bold;
-  font-size:18px;
+.actions {
+  display: flex;
+  gap: 12px;
+  padding: 14px 18px 18px;
+  max-width: 700px;
+  margin: auto;
 }
 
-.menu{
-  background:white;
-  color:#111;
+.actions a {
+  flex: 1;
+  text-decoration: none;
+  text-align: center;
+  padding: 18px 10px;
+  border-radius: 14px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-.call{
-  background:#1bb94b;
-  color:white;
+.menu-button {
+  background: white;
+  color: #111;
 }
 
-.viewer{
-  background:white;
-  max-width:1000px;
-  margin:auto;
-  padding:10px;
+.call-button {
+  background: #18c44f;
+  color: white;
 }
 
-canvas{
-  display:block;
-  width:100%;
-  height:auto;
-  margin:0 auto 12px;
+.viewer {
+  background: white;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.note{
-  text-align:center;
-  color:#bbb;
-  font-size:12px;
-  padding:12px;
+.viewer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
+
+.note {
+  text-align: center;
+  color: #bbb;
+  font-size: 13px;
+  padding: 12px;
 }
 </style>
 </head>
@@ -81,60 +86,20 @@ canvas{
 
 <header>
   <h1>🍕 MENU</h1>
+
+  <div class="actions">
+    <a class="menu-button" href="#menu">Voir le menu</a>
+    <a class="call-button" href="tel:+262692050580">📞 Appeler</a>
+  </div>
 </header>
 
-<div class="actions">
-  <a class="menu" href="#menu">Voir le menu</a>
-  <a class="call" href="tel:+262692050580">📞 Appeler</a>
-</div>
-
-<div id="menu" class="viewer">
-  <div id="pdf-container"></div>
+<div class="viewer" id="menu">
+  <img src="menu.webp" alt="Menu de la pizzeria">
 </div>
 
 <div class="note">
   Faites glisser pour parcourir le menu et utilisez deux doigts pour zoomer.
 </div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
-<script>
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-const url = "menu.pdf";
-const container = document.getElementById("pdf-container");
-
-pdfjsLib.getDocument(url).promise.then(function(pdf){
-
-  for(let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++){
-
-    pdf.getPage(pageNumber).then(function(page){
-
-      const viewport = page.getViewport({scale:2});
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
-
-      container.appendChild(canvas);
-
-      page.render({
-        canvasContext: context,
-        viewport: viewport
-      });
-    });
-
-  }
-
-}).catch(function(error){
-
-  container.innerHTML =
-    "<p style='color:#111;text-align:center;padding:30px'>Impossible d'afficher le menu.</p>";
-
-});
-</script>
 
 </body>
 </html>
